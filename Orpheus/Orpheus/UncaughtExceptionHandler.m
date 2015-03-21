@@ -1,17 +1,16 @@
 //
-//  RTDUncaughtExceptionHandler.m
-//  RefreshToDeath
+//  UncaughtExceptionHandler.m
+//  Orpheus
 //
 //  Created by Ben Guo on 3/21/15.
 //  Copyright (c) 2015 benzguo. All rights reserved.
 //
 
-#import "RTDUncaughtExceptionHandler.h"
+#import "UncaughtExceptionHandler.h"
 @import Foundation;
 @import UIKit;
 
 volatile void exceptionHandler(NSException *exception) {
-    NSLog(@"EXCEPTION");
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"orpheus://halp"]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"refresh2d://halp"]];
 }
 NSUncaughtExceptionHandler *exceptionHandlerPtr = &exceptionHandler;

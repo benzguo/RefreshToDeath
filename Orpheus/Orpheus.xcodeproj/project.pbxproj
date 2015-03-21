@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9601EBC91ABDF3570057E163 /* UncaughtExceptionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 9601EBC81ABDF3570057E163 /* UncaughtExceptionHandler.m */; };
 		96BBFDB41ABDDA1000AD5029 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96BBFDB31ABDDA1000AD5029 /* AppDelegate.swift */; };
 		96BBFDB61ABDDA1000AD5029 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96BBFDB51ABDDA1000AD5029 /* ViewController.swift */; };
 		96BBFDB91ABDDA1000AD5029 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96BBFDB71ABDDA1000AD5029 /* Main.storyboard */; };
@@ -26,6 +27,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9601EBC61ABDF3560057E163 /* Orpheus-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Orpheus-Bridging-Header.h"; sourceTree = "<group>"; };
+		9601EBC71ABDF3570057E163 /* UncaughtExceptionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UncaughtExceptionHandler.h; sourceTree = "<group>"; };
+		9601EBC81ABDF3570057E163 /* UncaughtExceptionHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UncaughtExceptionHandler.m; sourceTree = "<group>"; };
 		96BBFDAE1ABDDA1000AD5029 /* Orpheus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Orpheus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		96BBFDB21ABDDA1000AD5029 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		96BBFDB31ABDDA1000AD5029 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -78,11 +82,14 @@
 			isa = PBXGroup;
 			children = (
 				96BBFDB31ABDDA1000AD5029 /* AppDelegate.swift */,
+				9601EBC71ABDF3570057E163 /* UncaughtExceptionHandler.h */,
+				9601EBC81ABDF3570057E163 /* UncaughtExceptionHandler.m */,
 				96BBFDB51ABDDA1000AD5029 /* ViewController.swift */,
 				96BBFDB71ABDDA1000AD5029 /* Main.storyboard */,
 				96BBFDBA1ABDDA1000AD5029 /* Images.xcassets */,
 				96BBFDBC1ABDDA1000AD5029 /* LaunchScreen.xib */,
 				96BBFDB11ABDDA1000AD5029 /* Supporting Files */,
+				9601EBC61ABDF3560057E163 /* Orpheus-Bridging-Header.h */,
 			);
 			path = Orpheus;
 			sourceTree = "<group>";
@@ -214,6 +221,7 @@
 			files = (
 				96BBFDB61ABDDA1000AD5029 /* ViewController.swift in Sources */,
 				96BBFDB41ABDDA1000AD5029 /* AppDelegate.swift in Sources */,
+				9601EBC91ABDF3570057E163 /* UncaughtExceptionHandler.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -338,9 +346,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = Orpheus/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Orpheus/Orpheus-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -348,9 +359,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = Orpheus/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Orpheus/Orpheus-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -407,6 +420,7 @@
 				96BBFDCF1ABDDA1000AD5029 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		96BBFDD01ABDDA1000AD5029 /* Build configuration list for PBXNativeTarget "OrpheusTests" */ = {
 			isa = XCConfigurationList;
@@ -415,6 +429,7 @@
 				96BBFDD21ABDDA1000AD5029 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

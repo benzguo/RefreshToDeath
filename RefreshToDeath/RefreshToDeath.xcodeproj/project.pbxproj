@@ -14,7 +14,7 @@
 		968B27861ABD10B9006DEFC4 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 968B27841ABD10B9006DEFC4 /* LaunchScreen.xib */; };
 		968B27921ABD10B9006DEFC4 /* RefreshToDeathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968B27911ABD10B9006DEFC4 /* RefreshToDeathTests.swift */; };
 		968B279C1ABD11FF006DEFC4 /* WebViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968B279B1ABD11FF006DEFC4 /* WebViewCell.swift */; };
-		96BBFDD61ABDEE0500AD5029 /* RTDUncaughtExceptionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 96BBFDD51ABDEE0500AD5029 /* RTDUncaughtExceptionHandler.m */; };
+		96BBFDD61ABDEE0500AD5029 /* UncaughtExceptionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 96BBFDD51ABDEE0500AD5029 /* UncaughtExceptionHandler.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,8 +40,8 @@
 		968B27911ABD10B9006DEFC4 /* RefreshToDeathTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshToDeathTests.swift; sourceTree = "<group>"; };
 		968B279B1ABD11FF006DEFC4 /* WebViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewCell.swift; sourceTree = "<group>"; };
 		96BBFDD31ABDEE0400AD5029 /* RefreshToDeath-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RefreshToDeath-Bridging-Header.h"; sourceTree = "<group>"; };
-		96BBFDD41ABDEE0500AD5029 /* RTDUncaughtExceptionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTDUncaughtExceptionHandler.h; sourceTree = "<group>"; };
-		96BBFDD51ABDEE0500AD5029 /* RTDUncaughtExceptionHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTDUncaughtExceptionHandler.m; sourceTree = "<group>"; };
+		96BBFDD41ABDEE0500AD5029 /* UncaughtExceptionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UncaughtExceptionHandler.h; sourceTree = "<group>"; };
+		96BBFDD51ABDEE0500AD5029 /* UncaughtExceptionHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UncaughtExceptionHandler.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,8 +86,8 @@
 				968B277B1ABD10B9006DEFC4 /* AppDelegate.swift */,
 				968B277D1ABD10B9006DEFC4 /* ViewController.swift */,
 				968B279B1ABD11FF006DEFC4 /* WebViewCell.swift */,
-				96BBFDD41ABDEE0500AD5029 /* RTDUncaughtExceptionHandler.h */,
-				96BBFDD51ABDEE0500AD5029 /* RTDUncaughtExceptionHandler.m */,
+				96BBFDD41ABDEE0500AD5029 /* UncaughtExceptionHandler.h */,
+				96BBFDD51ABDEE0500AD5029 /* UncaughtExceptionHandler.m */,
 				96BBFDD31ABDEE0400AD5029 /* RefreshToDeath-Bridging-Header.h */,
 				968B277F1ABD10B9006DEFC4 /* Main.storyboard */,
 				968B27821ABD10B9006DEFC4 /* Images.xcassets */,
@@ -229,7 +229,7 @@
 			files = (
 				968B277E1ABD10B9006DEFC4 /* ViewController.swift in Sources */,
 				968B279C1ABD11FF006DEFC4 /* WebViewCell.swift in Sources */,
-				96BBFDD61ABDEE0500AD5029 /* RTDUncaughtExceptionHandler.m in Sources */,
+				96BBFDD61ABDEE0500AD5029 /* UncaughtExceptionHandler.m in Sources */,
 				968B277C1ABD10B9006DEFC4 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

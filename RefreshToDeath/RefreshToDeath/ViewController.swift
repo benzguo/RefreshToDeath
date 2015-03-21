@@ -23,6 +23,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     let locationManager = CLLocationManager()
     var timer : NSTimer?
     var numberOfRows = 5
+    var lastRow : Int = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +33,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = 100
-        tableView.tableFooterView = UIView()
+        tableView.tableFooterView = UIView(frame: CGRectMake(0, 0, 100, 200))
+
         locationManager.requestAlwaysAuthorization()
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -42,10 +44,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     func reload() {
         let rand : Int = Int(arc4random_uniform(UInt32(numberOfRows)))
-        if rand >= 0 && rand < numberOfRows {
+        if rand >= 0 && rand < numberOfRows && rand != lastRow {
             let indexPath = NSIndexPath(forRow: rand, inSection: 0)
             let cell = self.tableView.cellForRowAtIndexPath(indexPath) as WebViewCell
             cell.reload()
+            lastRow = rand
+            log("reloaded row \(rand)")
         }
     }
 
@@ -99,10 +103,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
 
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
-        view.backgroundColor = UIColor.greenColor().colorWithAlphaComponent(0.5)
-        UIView.animateWithDuration(2, animations: {
-            self.view.backgroundColor = UIColor.whiteColor()
-        })
         log("updated location")
     }
 
