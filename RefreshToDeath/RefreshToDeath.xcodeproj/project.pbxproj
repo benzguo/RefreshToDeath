@@ -14,6 +14,7 @@
 		968B27861ABD10B9006DEFC4 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 968B27841ABD10B9006DEFC4 /* LaunchScreen.xib */; };
 		968B27921ABD10B9006DEFC4 /* RefreshToDeathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968B27911ABD10B9006DEFC4 /* RefreshToDeathTests.swift */; };
 		968B279C1ABD11FF006DEFC4 /* WebViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968B279B1ABD11FF006DEFC4 /* WebViewCell.swift */; };
+		96BBFDD61ABDEE0500AD5029 /* RTDUncaughtExceptionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 96BBFDD51ABDEE0500AD5029 /* RTDUncaughtExceptionHandler.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +39,9 @@
 		968B27901ABD10B9006DEFC4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		968B27911ABD10B9006DEFC4 /* RefreshToDeathTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshToDeathTests.swift; sourceTree = "<group>"; };
 		968B279B1ABD11FF006DEFC4 /* WebViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewCell.swift; sourceTree = "<group>"; };
+		96BBFDD31ABDEE0400AD5029 /* RefreshToDeath-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RefreshToDeath-Bridging-Header.h"; sourceTree = "<group>"; };
+		96BBFDD41ABDEE0500AD5029 /* RTDUncaughtExceptionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTDUncaughtExceptionHandler.h; sourceTree = "<group>"; };
+		96BBFDD51ABDEE0500AD5029 /* RTDUncaughtExceptionHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTDUncaughtExceptionHandler.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +86,9 @@
 				968B277B1ABD10B9006DEFC4 /* AppDelegate.swift */,
 				968B277D1ABD10B9006DEFC4 /* ViewController.swift */,
 				968B279B1ABD11FF006DEFC4 /* WebViewCell.swift */,
+				96BBFDD41ABDEE0500AD5029 /* RTDUncaughtExceptionHandler.h */,
+				96BBFDD51ABDEE0500AD5029 /* RTDUncaughtExceptionHandler.m */,
+				96BBFDD31ABDEE0400AD5029 /* RefreshToDeath-Bridging-Header.h */,
 				968B277F1ABD10B9006DEFC4 /* Main.storyboard */,
 				968B27821ABD10B9006DEFC4 /* Images.xcassets */,
 				968B27841ABD10B9006DEFC4 /* LaunchScreen.xib */,
@@ -164,6 +171,11 @@
 				TargetAttributes = {
 					968B27751ABD10B9006DEFC4 = {
 						CreatedOnToolsVersion = 6.2;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					968B278A1ABD10B9006DEFC4 = {
 						CreatedOnToolsVersion = 6.2;
@@ -217,6 +229,7 @@
 			files = (
 				968B277E1ABD10B9006DEFC4 /* ViewController.swift in Sources */,
 				968B279C1ABD11FF006DEFC4 /* WebViewCell.swift in Sources */,
+				96BBFDD61ABDEE0500AD5029 /* RTDUncaughtExceptionHandler.m in Sources */,
 				968B277C1ABD10B9006DEFC4 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -342,9 +355,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = RefreshToDeath/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "RefreshToDeath/RefreshToDeath-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -352,9 +368,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = RefreshToDeath/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "RefreshToDeath/RefreshToDeath-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -411,6 +429,7 @@
 				968B27971ABD10B9006DEFC4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		968B27981ABD10B9006DEFC4 /* Build configuration list for PBXNativeTarget "RefreshToDeathTests" */ = {
 			isa = XCConfigurationList;
@@ -419,6 +438,7 @@
 				968B279A1ABD10B9006DEFC4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

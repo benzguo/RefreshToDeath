@@ -7,24 +7,57 @@
 //
 
 import UIKit
+import CoreLocation
+import AVFoundation
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+func crash() {
+    let a = []
+    let b: AnyObject = a[1]
+}
 
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate {
+
+    @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var tableView: UITableView!
     let reuseId = "webViewCell"
+    let locationManager = CLLocationManager()
+    var timer : NSTimer?
+    var numberOfRows = 5
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback, error: nil)
+
         tableView.registerClass(WebViewCell.self, forCellReuseIdentifier: reuseId)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = 100
         tableView.tableFooterView = UIView()
+        locationManager.requestAlwaysAuthorization()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.startUpdatingLocation()
+        timer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: "reload", userInfo: nil, repeats: true)
+    }
+
+    func reload() {
+        let rand : Int = Int(arc4random_uniform(UInt32(numberOfRows)))
+        if rand >= 0 && rand < numberOfRows {
+            let indexPath = NSIndexPath(forRow: rand, inSection: 0)
+            let cell = self.tableView.cellForRowAtIndexPath(indexPath) as WebViewCell
+            cell.reload()
+        }
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        view.backgroundColor = UIColor.redColor().colorWithAlphaComponent(0.5)
+        UIView.animateWithDuration(2, animations: {
+            self.view.backgroundColor = UIColor.whiteColor()
+        })
+        log("received memory warning")
+        let url = NSURL(string: "orpheus://halp")
+        url.map { UIApplication.sharedApplication().openURL($0) }
     }
 
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -32,13 +65,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return numberOfRows
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell: WebViewCell = tableView.dequeueReusableCellWithIdentifier(reuseId, forIndexPath: indexPath) as WebViewCell
         let url = NSUserDefaults.standardUserDefaults().URLForKey(WebViewCell.keyForIndex(indexPath.row))
-        url.map { cell.url = ($0, indexPath.row) }
+        url.map { cell.urlAndRow = ($0, indexPath.row) }
         return cell
     }
 
@@ -52,7 +85,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             { action in
                 let cell = tableView.cellForRowAtIndexPath(indexPath) as WebViewCell
                 let url = NSURL(string: textField.text)
-                url.map { cell.url = ($0, indexPath.row) }
+                url.map { cell.urlAndRow = ($0, indexPath.row) }
         }))
         ac.addTextFieldWithConfigurationHandler {
             tf in
@@ -65,6 +98,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     }
 
+    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
+        view.backgroundColor = UIColor.greenColor().colorWithAlphaComponent(0.5)
+        UIView.animateWithDuration(2, animations: {
+            self.view.backgroundColor = UIColor.whiteColor()
+        })
+        log("updated location")
+    }
+
+    func log(text: String) {
+        textView.text = text + "\n" + textView.text
+    }
 
 }
 
