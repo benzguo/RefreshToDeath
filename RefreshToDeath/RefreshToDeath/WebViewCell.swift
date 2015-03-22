@@ -12,20 +12,23 @@ class WebViewCell: UITableViewCell {
 
     let webView = UIWebView()
     let label = UILabel()
-    var row : Int = -1
-
-    var urlAndRow : (NSURL, Int) {
-        set(tuple) {
-            row = tuple.1
-            let request = NSURLRequest(URL: tuple.0)
-            webView.loadRequest(request)
-            label.text = tuple.0.absoluteString
-            label.sizeToFit()
-            setNeedsLayout()
-            NSUserDefaults.standardUserDefaults().setURL(tuple.0, forKey: WebViewCell.keyForIndex(tuple.1))
+    var row: Int? = nil
+    var _url: NSURL?
+    var url: NSURL?  {
+        set(newURL) {
+            _url = newURL
+            if let u = newURL {
+                webView.loadRequest(NSURLRequest(URL: u))
+                label.text = u.absoluteString
+                label.sizeToFit()
+                setNeedsLayout()
+                row.map {
+                    NSUserDefaults.standardUserDefaults().setURL(u, forKey: WebViewCell.keyForIndex($0))
+                }
+            }
         }
         get {
-            return (NSURL(), row)
+            return _url
         }
     }
 
@@ -37,6 +40,8 @@ class WebViewCell: UITableViewCell {
 
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         webView.userInteractionEnabled = false
+        webView.suppressesIncrementalRendering = true
+        webView.allowsInlineMediaPlayback = true
         webView.mediaPlaybackRequiresUserAction = false
         contentView.addSubview(webView)
         contentView.addSubview(label)
@@ -49,6 +54,16 @@ class WebViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
+    deinit {
+        webView.delegate = nil
+        webView.stopLoading()
+    }
+
+    override func prepareForReuse() {
+        webView.delegate = nil
+        webView.stopLoading()
+    }
+
     override func layoutSubviews() {
         super.layoutSubviews()
         webView.frame = CGRectInset(self.bounds, 5, 5)
@@ -56,7 +71,6 @@ class WebViewCell: UITableViewCell {
     }
 
     func reload() {
-        print("reloaded row \(row)\n")
         webView.reload()
         backgroundColor = UIColor.magentaColor()
         UIView.animateWithDuration(1, animations: { () -> Void in

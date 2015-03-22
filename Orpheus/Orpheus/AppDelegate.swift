@@ -19,7 +19,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         let url = NSURL(string: "refresh2d://arise")
         url.map { UIApplication.sharedApplication().openURL($0) }
-        
         return true
     }
 
@@ -44,7 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationWillTerminate(application: UIApplication) {
-        let url = NSURL(string: "refresh2d://arise")
+        let url = NSURL(string: "refresh2d://halp")
         url.map { UIApplication.sharedApplication().openURL($0) }
     }
 

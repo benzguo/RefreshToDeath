@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import CoreLocation
 import AVFoundation
 
 func crash() {
@@ -15,12 +14,11 @@ func crash() {
     let b: AnyObject = a[1]
 }
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var tableView: UITableView!
     let reuseId = "webViewCell"
-    let locationManager = CLLocationManager()
     var timer : NSTimer?
     var numberOfRows = 5
     var lastRow : Int = 0
@@ -35,11 +33,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         tableView.rowHeight = 100
         tableView.tableFooterView = UIView(frame: CGRectMake(0, 0, 100, 200))
 
-        locationManager.requestAlwaysAuthorization()
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.startUpdatingLocation()
-        timer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: "reload", userInfo: nil, repeats: true)
+        timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "reload", userInfo: nil, repeats: true)
     }
 
     func reload() {
@@ -47,7 +41,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         if rand >= 0 && rand < numberOfRows && rand != lastRow {
             let indexPath = NSIndexPath(forRow: rand, inSection: 0)
             let cell = self.tableView.cellForRowAtIndexPath(indexPath) as WebViewCell
-            cell.reload()
+            cell.row = rand
+            let url = NSUserDefaults.standardUserDefaults().URLForKey(WebViewCell.keyForIndex(indexPath.row))
+            if cell.url != url {
+                cell.url = url
+            }
+            else {
+                cell.reload()
+            }
             lastRow = rand
             log("reloaded row \(rand)")
         }
@@ -74,8 +75,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell: WebViewCell = tableView.dequeueReusableCellWithIdentifier(reuseId, forIndexPath: indexPath) as WebViewCell
-        let url = NSUserDefaults.standardUserDefaults().URLForKey(WebViewCell.keyForIndex(indexPath.row))
-        url.map { cell.urlAndRow = ($0, indexPath.row) }
+        cell.row = indexPath.row
         return cell
     }
 
@@ -88,8 +88,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         ac.addAction(UIAlertAction(title: "OK", style: .Default, handler:
             { action in
                 let cell = tableView.cellForRowAtIndexPath(indexPath) as WebViewCell
+                cell.row = indexPath.row
                 let url = NSURL(string: textField.text)
-                url.map { cell.urlAndRow = ($0, indexPath.row) }
+                url.map { cell.url = $0 }
         }))
         ac.addTextFieldWithConfigurationHandler {
             tf in
@@ -102,12 +103,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     }
 
-    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
-        log("updated location")
-    }
-
     func log(text: String) {
-        textView.text = text + "\n" + textView.text
+        if (textView.text.utf16Count > 1000) {
+            self.textView.text = text
+        }
+        else {
+            textView.text = text + "\n" + textView.text
+        }
     }
 
 }
