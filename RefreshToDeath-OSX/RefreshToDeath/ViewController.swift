@@ -30,10 +30,24 @@ class ViewController: NSViewController {
     var textFieldToWebView : [NSTextField: WebView]?
     var webViews: [WebView]?
     var textFields: [NSTextField]?
-    var lastIndex: Int = 0
+    var indices: [Int] = []
+
+    func shuffle(xs: [Int]) -> [Int] {
+        var ys = xs
+        for i in stride(from: xs.count - 1, to: 0, by:-1) {
+            let j = Int(arc4random_uniform(UInt32(i)))
+            let ys_i = ys[i]
+            ys[i] = ys[j]
+            ys[j] = ys_i
+        }
+        return ys
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        view.wantsLayer = true
+        view.layer?.backgroundColor = NSColor.blackColor().CGColor
 
         textFieldToWebView =
             [ tf1: wv1, tf2: wv2, tf3: wv3, tf4: wv4, tf5: wv5, tf6: wv6, tf7: wv7 ]
@@ -59,15 +73,20 @@ class ViewController: NSViewController {
 
     func reload() {
         let count = webViews!.count
-        let rand : Int = Int(arc4random_uniform(UInt32(count)))
-        if rand >= 0 && rand < count && rand != lastIndex {
-            let wv = webViews![rand]
-            wv.reload(self)
-            if (rand == 0) {
-                NSURLCache.sharedURLCache().removeAllCachedResponses()
+        if indices.count == 0 {
+            indices = shuffle([Int](0..<7))
+            NSURLCache.sharedURLCache().removeAllCachedResponses()
+            for tf in textFields! {
+                tf.textColor = NSColor.whiteColor()
             }
-            lastIndex = rand
         }
+        let i = indices.last!
+        indices.removeLast()
+
+        let wv = webViews![i]
+        wv.reload(self)
+        let tf = textFields![i]
+        tf.textColor = NSColor.greenColor()
     }
 
     @IBAction func textFieldEnter(sender: AnyObject) {
