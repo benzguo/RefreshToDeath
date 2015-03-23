@@ -45,12 +45,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             let url = NSUserDefaults.standardUserDefaults().URLForKey(WebViewCell.keyForIndex(indexPath.row))
             if cell.url != url {
                 cell.url = url
+                cell.url.map { self.log("loaded \($0)") }
             }
             else {
                 cell.reload()
+                cell.url.map { self.log("reloaded \($0)") }
+            }
+            if (rand == 0) {
+                NSURLCache.sharedURLCache().removeAllCachedResponses()
+                log("cleared cache")
             }
             lastRow = rand
-            log("reloaded row \(rand)")
         }
     }
 

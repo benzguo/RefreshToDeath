@@ -26,6 +26,9 @@ class WebViewCell: UITableViewCell {
                     NSUserDefaults.standardUserDefaults().setURL(u, forKey: WebViewCell.keyForIndex($0))
                 }
             }
+            else {
+                webView.stopLoading()
+            }
         }
         get {
             return _url

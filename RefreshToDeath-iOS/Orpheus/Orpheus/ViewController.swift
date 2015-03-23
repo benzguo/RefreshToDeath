@@ -16,6 +16,13 @@ class ViewController: UIViewController {
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        arise()
+        NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: "awake", userInfo: nil, repeats: true)
+    }
+    
+    func arise() {
+        let url = NSURL(string: "refresh2d://arise")
+        url.map { UIApplication.sharedApplication().openURL($0) }
     }
 
     override func didReceiveMemoryWarning() {
